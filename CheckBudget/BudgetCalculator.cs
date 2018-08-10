@@ -72,6 +72,7 @@ namespace CheckBudget
        
 
     }
+
     public class YouShallNotPassException : Exception
     {
     }
