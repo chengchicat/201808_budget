@@ -21,6 +21,18 @@ namespace CheckBudget
             {
                 throw new YouShallNotPassException();
             }
+            else
+            {
+                Decimal total = 0;
+
+                for (DateTime date = startDate; date <= endDate; date = date.AddDays(1))
+                {
+                    total += (MonthTotalAmount(date) / DateTime.DaysInMonth(date.Year, date.Month));
+                }
+                return total;
+            }
+            #region none
+            /*
             if (endDate.Month == startDate.Month)
             {
                 if (_budgets.Find(c => c.Month == startDate.ToString("yyyyMM")) == null)
@@ -52,8 +64,10 @@ namespace CheckBudget
                 }
                 return StartAmount + MiddleAmount + EndAmount;
             }
+            */
+            #endregion
         }
-
+/*
         private int AfterDays(DateTime date)
         {
             return DateTime.DaysInMonth(date.Year, date.Month) - date.Day + 1;
@@ -62,15 +76,13 @@ namespace CheckBudget
         {
             return date.Day;
         }
-
+*/
         private Decimal MonthTotalAmount(DateTime date)
         {
             if (_budgets.Find(c => c.Month == date.ToString("yyyyMM")) == null)
                 return Decimal.Zero;
             return _budgets.Find(c => c.Month == date.ToString("yyyyMM")).BudgetPerMonth;
         }
-       
-
     }
 
     public class YouShallNotPassException : Exception
