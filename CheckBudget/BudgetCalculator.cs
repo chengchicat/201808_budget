@@ -30,53 +30,9 @@ namespace CheckBudget
                     total += (MonthTotalAmount(date) / DateTime.DaysInMonth(date.Year, date.Month));
                 }
                 return total;
-            }
-            #region none
-            /*
-            if (endDate.Month == startDate.Month)
-            {
-                if (_budgets.Find(c => c.Month == startDate.ToString("yyyyMM")) == null)
-                {
-                    return Decimal.Zero;
+            }         
+        }
 
-                }
-                else
-                {
-                    return (MonthTotalAmount(startDate)
-                                        / DateTime.DaysInMonth(startDate.Year, startDate.Month))
-                                        *((endDate - startDate).Days+1);
-                }
-                
-            }
-            else
-            {
-                Decimal StartAmount = (MonthTotalAmount(startDate)
-                                        / DateTime.DaysInMonth(startDate.Year, startDate.Month))
-                                        * AfterDays(startDate);
-                Decimal EndAmount = (MonthTotalAmount(endDate)
-                                        / DateTime.DaysInMonth(endDate.Year, endDate.Month))
-                                        * PreDays(endDate);
-                Decimal MiddleAmount = 0;
-
-                for (int i = 1 ; i < (endDate.Month - startDate.Month) + 12 * (endDate.Year - startDate.Year); i++)
-                {
-                    MiddleAmount += MonthTotalAmount(startDate.AddMonths(i));
-                }
-                return StartAmount + MiddleAmount + EndAmount;
-            }
-            */
-            #endregion
-        }
-/*
-        private int AfterDays(DateTime date)
-        {
-            return DateTime.DaysInMonth(date.Year, date.Month) - date.Day + 1;
-        }
-        private int PreDays(DateTime date)
-        {
-            return date.Day;
-        }
-*/
         private Decimal MonthTotalAmount(DateTime date)
         {
             if (_budgets.Find(c => c.Month == date.ToString("yyyyMM")) == null)
